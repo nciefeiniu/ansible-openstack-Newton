@@ -10,14 +10,12 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
    ```bash
    vagrant box add ubuntu/trusty64 package.box
    vagrant box add ubuntu-16.04 bento_ubuntu-16.04.box
-   vagrant up
    ```
+- 启动测试环境
+	```bash
+	vagrant up
+	```
 
-
-windows下 在cmd中 vagrant box add ubuntu/trusty64 package.box
-
-
-cd 当前目录，vagrant up 即可启动测试平台
 
 ## 2017-12-3
     安装了基础环境:
