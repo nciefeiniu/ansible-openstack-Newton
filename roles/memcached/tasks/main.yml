@@ -1,0 +1,18 @@
+- name: Installing the memcached Service
+  apt: name={{ item }} state=installed
+  with_items:
+    - memcached
+    - python-memcache
+    
+- name: Configuring the memcached server conf
+#  template: src=memcached.conf.j2 dest=/etc/memcached.conf
+#  shell: sed -i s/127.0.0.1/{{ controller_ip }}/ /etc/memcached.conf
+#  become: yes
+  lineinfile:
+      dest: /etc/memcached.conf
+      regexp: '-l 127.0.0.1'
+      line: '-l {{ controller_ip }}'
+
+  
+- name: restarting the Memcached Services
+  service: name=memcached state=restarted enabled=yes

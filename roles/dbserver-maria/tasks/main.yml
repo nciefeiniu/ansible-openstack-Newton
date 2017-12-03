@@ -1,0 +1,42 @@
+- name: Installing the packages required for the database on the Controller
+  apt: name="{{ item }}" state=installed
+  with_items:
+    - mariadb-server
+    - python-pymysql
+    - python-setuptools
+    - libmysqld-dev
+    - libmysqlclient-dev
+    - python-dev
+- name: Installing the MySQL-python-dev
+  easy_install: name=mysql-python state=latest
+
+- name: Configuring the mysql server for the Openstack services
+  template: src=99-openstack.cnf.j2 dest=/etc/mysql/mariadb.conf.d/99-openstack.cnf
+
+#- name: Starting the services and making them persistent accross the reboot
+#  service: name=mariadb host=localhost state=started enabled=yes
+
+
+- name: Sets the root password
+  mysql_user: user=root password="{{ root_db_password }}" host=localhost
+
+- name: Deletes anonymous MySQL server user for ansible_fqdn
+  mysql_user: user="" host="{{ controller_ip }}" state=absent
+
+- name: Deletes anonymous MySQL server user for localhost
+  mysql_user: user="" state="absent"
+
+- name: Secures the MySQL root user for IPV6 localhost
+  mysql_user: user="root" password="{{ root_db_password }}" host="::1"
+
+- name: Secures the MySQL root user for IPV4 localhost
+  mysql_user: user="root" password="{{ root_db_password }}" host="127.0.0.1"
+
+- name: Secures the MySQL root user for localhost domain
+  mysql_user: user="root" password="{{ root_db_password }}" host="localhost"
+
+- name: Secures the MySQL root user for server_hostname domain
+  mysql_user: user="root" password="{{ root_db_password }}" host="{{ controller_ip }}"
+
+- name: Removes the MySQL test database
+  mysql_db: db=test state=absent

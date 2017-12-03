@@ -1,0 +1,7 @@
+---
+- name: install ntp service
+  apt: name=chrony state=present update_cache=yes
+- name: copy chrony.conf
+  template: src=chrony.conf.j2 dest=/etc/chrony/chrony.conf
+- name: restart chrony
+  service: name=chrony state=restarted

@@ -1,0 +1,15 @@
+---
+
+- hosts: controller-nodes
+  roles:
+    - role: ntp-controller
+    - role: infracommon
+    - role: dbserver-maria
+    - role: rabbitserver
+    - role: memcached
+    - role: dbserver_population
+
+- hosts: compute-nodes
+  roles:
+    - role: ntp-other
+    - role: infracommon
