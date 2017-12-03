@@ -9,11 +9,19 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 - 导入box： 
    ```bash
    vagrant box add ubuntu/trusty64 package.box
+   
    vagrant box add ubuntu-16.04 bento_ubuntu-16.04.box
    ```
 - 启动测试环境
 	```bash
 	vagrant up
+	```
+
+- 运行ansible-playbook(请在管理机上运行（192.168.221.100）)
+	```bash
+	cd /vagrant
+	
+	sudo ansible-playbook -s site.yml
 	```
 
 
