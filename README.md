@@ -25,7 +25,7 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 	```
 
 
-## 2017-12-3
+#### 2017-12-3
     安装了基础环境:
 	- chrony
 	- mariadb
