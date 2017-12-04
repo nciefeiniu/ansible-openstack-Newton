@@ -13,8 +13,8 @@
 - name: Configuring the mysql server for the Openstack services
   template: src=99-openstack.cnf.j2 dest=/etc/mysql/mariadb.conf.d/99-openstack.cnf
 
-#- name: Starting the services and making them persistent accross the reboot
-#  service: name=mariadb host=localhost state=started enabled=yes
+- name: ensure the service is starting 
+  service: name=mysql state=started enabled=yes
 
 
 - name: Sets the root password
