@@ -24,7 +24,7 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 	sudo ansible-playbook -s site.yml
 	```
 ---
-#### update 2017-12-8
+#### Update 2017-12-8
 	添加keystone
 
 #### Update 2017-12-4
