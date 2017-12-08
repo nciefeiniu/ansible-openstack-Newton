@@ -57,3 +57,13 @@ shared_secret: "asdasd"
 
 # # Cinder
 physical_device: /dev/sdb
+
+#environment
+admin_env:
+   OS_USERNAME: "admin"
+   OS_PASSWORD: "{{ admin_pass }}"
+   OS_PROJECT_NAME: "admin"
+   OS_USER_DOMAIN_NAME: "Default"
+   OS_PROJECT_DOMAIN_NAME: "Default"
+   OS_AUTH_URL: "http://controller:35357/v3"
+   OS_IDENTITY_API_VERSION: "3"
