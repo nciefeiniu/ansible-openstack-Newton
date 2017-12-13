@@ -42,6 +42,9 @@ cinder_identity_password: "cinder"
 heat_identity_password: "heat"
 trove_identity_password: "trove"
 
+# # Glance passwd
+glance_user_pass: "glance"
+
 # # OpenStack variables
 admin_token: "012345SECRET99TOKEN012345"
 region: RegionOne
@@ -58,7 +61,8 @@ shared_secret: "asdasd"
 # # Cinder
 physical_device: /dev/sdb
 
-#environment
+
+
 admin_env:
    OS_USERNAME: "admin"
    OS_PASSWORD: "{{ admin_pass }}"

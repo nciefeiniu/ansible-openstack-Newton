@@ -1,0 +1,51 @@
+#直接使用environment环境，不使用脚本
+#- name: Source the admin credentials to gain access to admin-only CLI commands
+#  shell: . admin-openrc
+#  args: 
+#    chdir: /root
+#    become: yes
+
+- name: Create the glance user
+  os_user: name=glance  password={{ glance_user_pass }} domain=default
+#  shell: openstack user create --domain default --password-prompt glance
+  environment: "{{ admin_env }}" 
+  tags:
+     - glance
+  
+- name: Add the admin role to the glance user and service project
+  os_user_role: user=glance role=admin project=service
+  environment: "{{ admin_env }}"
+  
+- name: Create the glance service entity
+  os_keystone_service:
+     name: glance
+     service_type: image
+     description: OpenStack Image
+  environment: "{{ admin_env }}"
+  
+- name: Create the Image service API endpoints
+  shell: openstack endpoint create --region RegionOne image {{ item }} http://controller:9292
+  with_items:
+      - public
+      - internal
+      - admin
+  environment: "{{ admin_env }}"
+  
+- name: Install the packages
+  apt: name=glance state=present
+  
+- name: Edit the /etc/glance/glance-api.conf file and complete the following actions
+  template: src=glance-api.j2  dest=/etc/glance/glance-api.conf
+  
+- name: Edit the /etc/glance/glance-registry.conf file and complete the following actions
+  template: src=glance-registry.j2 dest=/etc/glance/glance-registry.conf
+  
+- name: Sync glance database
+  shell: sudo -s /bin/sh -c "glance-manage db_sync" glance
+  become: yes
+  
+- name: Restart the Image services
+  service: name={{ items }} state=restarted
+  items:
+    - glance-registry
+    - glance-api

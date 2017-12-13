@@ -9,6 +9,7 @@
    - memcached
    - dbserver_population
    - keystone-n
+   - glance
 
 - hosts: compute-nodes
   roles:
