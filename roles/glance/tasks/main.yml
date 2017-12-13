@@ -9,8 +9,7 @@
   os_user: name=glance  password={{ glance_user_pass }} domain=default
 #  shell: openstack user create --domain default --password-prompt glance
   environment: "{{ admin_env }}" 
-  tags:
-     - glance
+
   
 - name: Add the admin role to the glance user and service project
   os_user_role: user=glance role=admin project=service
@@ -46,6 +45,6 @@
   
 - name: Restart the Image services
   service: name={{ items }} state=restarted
-  items:
+  with_items:
     - glance-registry
     - glance-api
