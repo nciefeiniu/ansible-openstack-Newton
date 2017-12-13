@@ -1,9 +1,13 @@
 ---
 
-- name: Install pip and shade
+- name: Install pip
   apt: name=python-pip state=present
   tags:
      - keystone  
+ 
+- name: Update pip
+#  pip: name=pip
+  shell: sudo pip install --upgrade pip
 
 - name: Install shade
   pip: name=shade state=present
