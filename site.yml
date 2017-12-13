@@ -8,7 +8,7 @@
    - rabbitserver
    - memcached
    - dbserver_population
-   - keystone-n
+   - keystone
    - glance
 
 - hosts: compute-nodes
