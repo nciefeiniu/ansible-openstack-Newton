@@ -2,7 +2,7 @@ ansible-openstack-Newton
 ========================
 
 ## 开始
-环境ubuntu 16.04
+环境ubuntu 16.04   (在线安装，请保持网络通畅)
 Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 - ubuntu 14.04地址： 链接：https://pan.baidu.com/s/1miBrRS0 密码：u20d
 - ubuntu 16.04地址： 链接：https://pan.baidu.com/s/1dF3yFIT 密码：njuc

@@ -9,7 +9,6 @@
   os_user: name=glance  password={{ glance_user_pass }} domain=default
 #  shell: openstack user create --domain default --password-prompt glance
   environment: "{{ admin_env }}" 
-
   
 - name: Add the admin role to the glance user and service project
   os_user_role: user=glance role=admin project=service
@@ -44,7 +43,21 @@
   become: yes
   
 - name: Restart the Image services
-  service: name={{ items }} state=restarted
+  service: name={{ item }} state=restarted
   with_items:
     - glance-registry
     - glance-api
+    
+#验证glance
+- name : Update cirros image to Controller Node
+  copy: src=cirros-0.3.4-x86_64-disk.img dest=/home/cirros-0.3.4-x86_64-disk.img
+  become: yes
+
+- name: Add cirros image
+  os_image: name="cirros 0.3.4" container_format=bare state=present
+            filename=/home/cirros-0.3.4-x86_64-disk.img
+            disk_format=qcow2
+            is_public=yes
+  environment: "{{ admin_env }}"
+  
+
