@@ -13,3 +13,5 @@
 
 - name: Install OpenStack client
   apt: name=python-openstackclient state=latest
+  
+      

@@ -10,6 +10,7 @@ rabbit_password: "asdasd"
 
 # # IPs
 controller_ip: 192.168.221.101
+compute_ip: 192.168.221.102
 storage_ip: 192.168.221.101
 network_node_ip: 192.168.221.101
 network_node_netmask: 255.255.255.0
@@ -44,6 +45,7 @@ trove_identity_password: "trove"
 
 # # Glance passwd
 glance_user_pass: "glance"
+nova_user_pass: "nova"
 
 # # OpenStack variables
 admin_token: "012345SECRET99TOKEN012345"
