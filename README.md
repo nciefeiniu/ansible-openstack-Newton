@@ -24,6 +24,11 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 	sudo ansible-playbook -s site.yml
 	```
 ---
+#### Update 2017-12-14
+	添加nova-controller and nova-compute
+	
+	发现了点问题，ansible自动在glance创建镜像报错，无法执行，正在解决...
+
 #### Update 2017-12-13
 	添加glance
 
