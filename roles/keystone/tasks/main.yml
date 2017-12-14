@@ -1,13 +1,20 @@
 ---
+- name: ensure hosts is right
+  lineinfile:
+      dest: /etc/hosts
+      state: present
+      regexp: '{{ controller_ip }} controller'
+      line: '{{ controller_ip }} controller'
 
-- name: Install pip
+- name: Install pip 
   apt: name=python-pip state=present
   tags:
      - keystone  
- 
+
 - name: Update pip
 #  pip: name=pip
   shell: sudo pip install --upgrade pip
+
 
 - name: Install shade
   pip: name=shade state=present
