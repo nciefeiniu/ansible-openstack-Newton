@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
         apt-get update
         add-apt-repository ppa:ansible/ansible
         apt-get update
-        apt-get install -y ansible
+        
         cat >> /etc/ssh/ssh_config <<EOF   
       StrictHostKeyChecking no
       UserKnownHostsFile=/dev/null

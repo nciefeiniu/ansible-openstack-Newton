@@ -1,0 +1,13 @@
+---
+
+- name: Install nova compute packages
+  apt: name=nova-compute state=installed force=yes
+  tags:
+     - nova-compute
+
+- name: Configure nova
+  template: src=nova.j2 dest=/etc/nova/nova.conf
+  notify:
+   - restart nova-compute
+  tags:
+     - nova-compute

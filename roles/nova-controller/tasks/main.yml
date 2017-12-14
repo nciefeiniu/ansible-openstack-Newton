@@ -1,0 +1,62 @@
+- name:  Create the nova user
+  os_user: name=nova password={{ nova_user_pass }} domain=default state=present
+  environment: "{{ admin_env }}"
+  tags:
+     - nova-controller
+
+- name: Add the admin role to the nova user
+  os_user_role: user=nova role=admin project=service state=present
+  environment: "{{ admin_env }}"
+  tags:
+     - nova-controller
+
+#这里是创建controller节点的nova，并不是compute节点的nova
+- name: Create the nova service entity
+  os_keystone_service:
+     state: present
+     name: nova
+     service_type: compute
+     description: OpenStack Compute
+  environment: "{{ admin_env }}"
+  tags:
+     - nova-controller
+
+- name: Create the Compute API service endpoints 
+  shell: openstack endpoint create --region RegionOne compute {{ item }} http://{{ controller_ip }}:8774/v2.1/%\(tenant_id\)s
+  with_items:
+      - public
+      - internal
+      - admin
+  environment: "{{ admin_env }}"
+  tags:
+     - nova-controller
+
+- name: Install Nova controller packages
+  apt: name={{ item }} state=installed force=yes
+  with_items:
+   - nova-api 
+   - nova-conductor 
+   - nova-consoleauth 
+   - nova-novncproxy 
+   - nova-scheduler 
+  tags:
+     - nova-controller
+
+- name: Edit the /etc/nova/nova.conf file and complete the following actions
+  template: src=nova.j2 dest=/etc/nova/nova.conf
+  tags:
+     - nova-controller  
+
+- name: Populate the Compute databases
+  shell: sudo -s /bin/sh -c "{{ item }}" nova
+  with_items:
+    - nova-manage api_db sync
+    - nova-manage db sync
+  notify:
+    - restart nova-api
+    - restart nova-consoleauth
+    - restart nova-scheduler
+    - restart nova-conductor
+    - restart nova-novncproxy
+  tags:
+     - nova-controller  

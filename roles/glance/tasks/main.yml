@@ -53,11 +53,12 @@
   copy: src=cirros-0.3.4-x86_64-disk.img dest=/home/cirros-0.3.4-x86_64-disk.img
   become: yes
 
-- name: Add cirros image
-  os_image: name="cirros 0.3.4" container_format=bare state=present
-            filename=/home/cirros-0.3.4-x86_64-disk.img
-            disk_format=qcow2
-            is_public=yes
+- name: Upload the image to the Image service using the QCOW2 disk format, bare container format, and public visibility so all projects can access it
+  shell: openstack image create "cirros"  --file /home/cirros-0.3.4-x86_64-disk.img --disk-format qcow2 --container-format bare --public
+  # os_image: name=cirros container_format=bare state=present
+  #           filename=/home/cirros-0.3.4-x86_64-disk.img
+  #           disk_format=qcow2
+  #           is_public=yes
   environment: "{{ admin_env }}"
   
 
