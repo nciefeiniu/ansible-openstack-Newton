@@ -24,6 +24,10 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 	sudo ansible-playbook -s site.yml
 	```
 ---
+#### Update 2017-12-15
+	在上传镜像之前update and upgrade后
+	再上传镜像就OK，-.- 很是不解
+	
 #### Update 2017-12-14
 	添加nova-controller and nova-compute
 	
