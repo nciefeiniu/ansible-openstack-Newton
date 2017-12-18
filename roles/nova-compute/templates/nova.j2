@@ -11,8 +11,8 @@ transport_url = rabbit://openstack:{{ rabbit_password }}@controller
 auth_strategy = keystone
 #这没改！！！
 my_ip = 192.168.221.102
-use_neutron  =  True 
-firewall_driver  =  nova.virt.firewall.NoopFirewallDriver
+use_neutron = True
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
 
 [database]
 connection=sqlite:////var/lib/nova/nova.sqlite
@@ -41,13 +41,13 @@ username = nova
 password = {{ nova_identity_password }}
 
 [vnc] 
-enabled = True 
-vncserver_listen = 0.0.0.0 
-vncserver_proxyclient_address = $my_ip 
-novncproxy_base_url = http//controller6080/vnc_auto.html
+enabled = True
+vncserver_listen = 0.0.0.0
+vncserver_proxyclient_address = $my_ip
+novncproxy_base_url = http://controller:6080/vnc_auto.html
 
 [glance] 
-api_servers = http//controller9292
+api_servers = http://controller:9292
 
 [oslo_concurrency] 
 lock_path = /var/lib/nova/tmp
