@@ -34,7 +34,7 @@
      - keystone
 
 - name: Syncing keystone database
-  shell: su -s /bin/sh -c "keystone-manage db_sync" keystone
+  shell: sudo -s /bin/sh -c "keystone-manage db_sync" keystone
   tags:
      - keystone
 
