@@ -1,5 +1,5 @@
 - name: ensure keystone database is present
-  mysql_db: name=keystone
+  mysql_db: name=keystone state=present
 
 - name: ensure keystone database user is present
   mysql_user: >
@@ -11,7 +11,7 @@
     - "%"
 
 - name: ensure glance database is present
-  mysql_db: name=glance
+  mysql_db: name=glance state=present
 
 - name: ensure glance database user is present
   mysql_user: >
@@ -26,7 +26,7 @@
     - ::1
 
 - name: ensure cinder database is present
-  mysql_db: name=cinder
+  mysql_db: name=cinder state=present
 
 - name: ensure cinder database user is present
   mysql_user: >
@@ -41,34 +41,34 @@
     - ::1
 
 - name: ensure nova database is present
-  mysql_db: name=nova
+  mysql_db: name=nova state=present
 
 - name: ensure nova database user is present
-  mysql_user: >
-    name=nova
-    host={{ item }}
-    password={{ nova_db_password }}
-    priv=nova.*:ALL
+  # mysql_user: >
+  #   name=nova
+  #   host={{ item }}
+  #   password={{ nova_db_password }}
+  #   priv=nova.*:ALL
+  # with_items:
+  #   - '%'
+  #   - localhost
+  mysql_user: name=nova password={{ nova_db_password }} host={{ item }}  priv=*.*:ALL,GRANT state=present
   with_items:
-    - '%'
-    - localhost
+    - "localhost"
+    - "%"
       
 - name: ensure nova database is present
-  mysql_db: name=nova_api
+  mysql_db: name=nova_api state=present
 
 - name: ensure nova_api database user is present
-  mysql_user: >
-    name=nova_api
-    host={{ item }}
-    password={{ nova_api_db_password }}
-    priv=nova.*:ALL
+  mysql_user: name=nova_api password={{ nova_db_password }} host={{ item }}  priv=*.*:ALL,GRANT state=present
   with_items:
-    - '%'
-    - localhost
+    - "localhost"
+    - "%"
 
 
 - name: ensure neutron database is present
-  mysql_db: name=neutron
+  mysql_db: name=neutron state=present
     
 - name: ensure neutron database user is present
   mysql_user: >
@@ -83,7 +83,7 @@
     - ::1
                    
 - name: ensure heat database is present
-  mysql_db: name=heat
+  mysql_db: name=heat state=present
     
 - name: ensure heat database user is present
   mysql_user: >
@@ -98,7 +98,7 @@
     - ::1
                    
 - name: ensure trove database is present
-  mysql_db: name=trove
+  mysql_db: name=trove state=present
     
 - name: ensure trove database user is present
   mysql_user: >

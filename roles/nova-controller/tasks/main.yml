@@ -48,10 +48,11 @@
      - nova-controller  
 
 - name: Populate the Compute databases
-  shell: sudo -s /bin/sh -c "{{ item }}" nova
+  shell: su -s /bin/sh -c "{{ item }}" nova
   with_items:
     - nova-manage api_db sync
     - nova-manage db sync
+  become: yes
   notify:
     - restart nova-api
     - restart nova-consoleauth
