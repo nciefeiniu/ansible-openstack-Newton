@@ -44,9 +44,10 @@ cinder_identity_password: "cinder"
 heat_identity_password: "heat"
 trove_identity_password: "trove"
 
-# # Glance passwd
+# # user passwd
 glance_user_pass: "glance"
 nova_user_pass: "nova"
+neutron_user_pass: "neutron"
 
 # # OpenStack variables
 admin_token: "012345SECRET99TOKEN012345"
@@ -74,3 +75,8 @@ admin_env:
    OS_PROJECT_DOMAIN_NAME: "Default"
    OS_AUTH_URL: "http://controller:35357/v3"
    OS_IDENTITY_API_VERSION: "3"
+   OS_IMAGE_API_VERSION: "2"
+
+METADATA_SECRET: "asdasd"
+
+PROVIDER_INTERFACE_NAME: "eth2"

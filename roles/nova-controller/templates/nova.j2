@@ -37,7 +37,7 @@ project_domain_name = Default
 user_domain_name = Default
 project_name = service
 username = nova
-password = {{ nova_identity_password }}
+password = {{ nova_user_pass }}
 
 [vnc]
 vncserver_listen = $my_ip
@@ -49,3 +49,15 @@ api_servers = http://controller:9292
 [oslo_concurrency]
 lock_path = /var/lib/nova/tmp
 
+[neutron]
+url = http://controller:9696
+auth_url = http://controller:35357
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+region_name = RegionOne
+project_name = service
+username = neutron
+password = {{ neutron_user_pass }}
+service_metadata_proxy = True
+metadata_proxy_shared_secret = {{ METADATA_SECRET }}

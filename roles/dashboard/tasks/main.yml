@@ -1,0 +1,16 @@
+---
+
+- name: Install the openstack-dashboard packages
+  apt: name=openstack-dashboard state=present update_cache=yes
+  tags:
+    - dashboard
+
+- name: Edit the /etc/openstack-dashboard/local_settings.py file and complete the following actions
+  template: src=local_settings.j2 dest=/etc/openstack-dashboard/local_settings.py
+  tags:
+    - dashboard   
+
+- name: Reload the web server configuration
+  service: name=apache2 state=reloaded
+  tags:
+    - dashboard  

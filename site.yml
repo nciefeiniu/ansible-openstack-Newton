@@ -2,19 +2,21 @@
 
 - hosts: controller-nodes
   roles:
-  #  - ntp-controller
-  #  - infracommon
-  #  - dbserver-maria
-  #  - rabbitserver
-  #  - memcached
-  #  - dbserver_population
-  #  - keystone-n
+   - ntp-controller
+   - infracommon
+   - dbserver-maria
+   - rabbitserver
+   - memcached
+   - dbserver_population
+   - keystone-n
    - glance
    - nova-controller
+  #  - neutron-controller
+  #  - dashboard
 
 - hosts: compute-nodes
   roles:
    - ntp-other
    - infracommon
    - nova-compute
-
+  #  - neutron-compute

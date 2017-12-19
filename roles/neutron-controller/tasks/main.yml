@@ -1,0 +1,106 @@
+---
+
+- name: Create the neutron user
+  os_user: name=neutron password={{ neutron_user_pass }} domain=default 
+  environment: "{{ admin_env }}"
+  tags:
+     - neutron-controller
+
+- name: Add the admin role to the neutron user
+  os_user_role: user=neutron role=admin project=service 
+  environment: "{{ admin_env }}"
+  tags:
+     - neutron-controller
+
+- name: Create the neutron service entity
+  os_keystone_service:
+     state: present
+     name: neutron
+     service_type: network
+     description: OpenStack Networking
+  environment: "{{ admin_env }}"
+  tags:
+     - neutron-controller
+
+- name: Create the Networking service API endpoints
+  shell: openstack endpoint create --region RegionOne network {{ item }} http://controller:9696 
+  with_items:
+      - public
+      - internal
+      - admin
+  environment: "{{ admin_env }}"
+  tags:
+     - neutron-controller
+
+#这里使用的简单的网络架构
+- name: Update system
+  apt: update_cache=yes upgrade=dist
+  tags:
+     - neutron-controller
+
+- name: Install the components
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+    - neutron-server
+    - neutron-plugin-ml2
+    - neutron-linuxbridge-agent
+    - neutron-dhcp-agent
+    - neutron-metadata-agent
+  tags:
+     - neutron-controller
+
+- name: Edit the /etc/neutron/neutron.conf file and complete the following actions
+  template: 
+    src: neutron.j2
+    dest: /etc/neutron/neutron.conf
+  tags:
+     - neutron-controller
+
+- name: Edit the /etc/neutron/plugins/ml2/ml2_conf.ini file and complete the following actions
+  template:
+    src: ml2_conf.j2
+    dest: /etc/neutron/plugins/ml2/ml2_conf.ini
+  tags:
+     - neutron-controller
+
+- name: Edit the /etc/neutron/plugins/ml2/linuxbridge_agent.ini file and complete the following actions
+  template:
+    src: linuxbridge_agent.j2
+    dest: /etc/neutron/plugins/ml2/linuxbridge_agent.ini
+  tags:
+     - neutron-controller
+
+- name: Edit the /etc/neutron/dhcp_agent.ini file and complete the following actions
+  template: 
+    src: dhcp_agent.j2
+    dest: /etc/neutron/dhcp_agent.ini
+  tags:
+     - neutron-controller
+
+- name: Edit the /etc/neutron/metadata_agent.ini file and complete the following actions
+  template:
+    src: metadata_agent.j2
+    dest: /etc/neutron/metadata_agent.ini         
+  tags:
+     - neutron-controller
+
+- name: Populate the database
+  shell: sudo -s /bin/sh -c "neutron-db-manage --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini upgrade head" neutron
+  become: yes
+  tags:
+     - neutron-controller
+
+- name: Restart the Compute API  and Networking service
+  service: name={{ item }} state=restarted
+  with_items:
+    - nova-api
+    - neutron-server
+    - neutron-linuxbridge-agent
+    - neutron-dhcp-agent
+    - neutron-metadata-agent
+    # - neutron-l3-agent
+  become: yes
+  tags:
+     - neutron-controller
+
+

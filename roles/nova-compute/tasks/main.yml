@@ -1,4 +1,12 @@
 ---
+- name: ensure hosts is right
+  lineinfile:
+      dest: /etc/hosts
+      state: present
+      regexp: '{{ controller_ip }} controller'
+      line: '{{ controller_ip }} controller'
+  tags:
+     - nova-compute
 
 - name: Install nova compute packages
   apt: name=nova-compute state=installed force=yes

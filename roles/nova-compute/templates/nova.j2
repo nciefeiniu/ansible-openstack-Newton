@@ -10,7 +10,7 @@ enabled_apis=osapi_compute,metadata
 transport_url = rabbit://openstack:{{ rabbit_password }}@controller
 auth_strategy = keystone
 #这没改！！！
-my_ip = 192.168.221.102
+my_ip = {{ compute_ip }}
 use_neutron = True
 firewall_driver = nova.virt.firewall.NoopFirewallDriver
 
@@ -38,7 +38,7 @@ project_domain_name = Default
 user_domain_name = Default
 project_name = service
 username = nova
-password = {{ nova_identity_password }}
+password = {{ nova_user_pass }}
 
 [vnc] 
 enabled = True
@@ -51,3 +51,14 @@ api_servers = http://controller:9292
 
 [oslo_concurrency] 
 lock_path = /var/lib/nova/tmp
+
+[neutron]
+url = http://controller:9696
+auth_url = http://controller:35357
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+region_name = RegionOne
+project_name = service
+username = neutron
+password = {{ neutron_user_pass }}

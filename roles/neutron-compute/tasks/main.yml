@@ -1,0 +1,32 @@
+---
+- name: Update system
+  apt: update_cache=yes upgrade=dist
+  tags:
+     - neutron-controller
+
+- name: Install the components
+  apt: name=neutron-linuxbridge-agent state=present
+  tags:
+    - neutron-compute
+
+- name: Edit the /etc/neutron/neutron.conf file and complete the following actions
+  template:
+    src: neutron.j2
+    dest: /etc/neutron/neutron.conf
+  tags:
+   - neutron-compute
+
+- name: Edit the /etc/neutron/plugins/ml2/linuxbridge_agent.ini file and complete the following actions
+  template:
+    src: linuxbridge_agent.j2
+    dest: /etc/neutron/plugins/ml2/linuxbridge_agent.ini
+  tegs:
+   - neutron-compute
+
+- name: Restart the Compute and neutron-linuxbridge-agent service
+  service: name={{ item }} state=restarted
+  with_items:
+    - nova-compute
+    - neutron-linuxbridge-agent
+  tags:
+   - neutron-compute    

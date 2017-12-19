@@ -53,6 +53,7 @@
   copy: src=cirros-0.3.4-x86_64-disk.img dest=/root/cirros-0.3.4-x86_64-disk.img
   become: yes
 
+#这里更新，成功解决了下面上传镜像的error
 - name: Update system
   apt: update_cache=yes upgrade=dist
 
