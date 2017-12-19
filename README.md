@@ -24,7 +24,11 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 	sudo ansible-playbook -s site.yml
 	```
 ---
-### Update 2017-12-18
+#### Update 2017-12-19
+	增加Neutron and Dashboard
+	但是 openstack network agent list 却始终是down状态。。。。正在解决
+
+#### Update 2017-12-18
 	解决nova同步数据出错
 
 #### Update 2017-12-15
