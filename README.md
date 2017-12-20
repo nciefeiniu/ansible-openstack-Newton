@@ -24,6 +24,11 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 	sudo ansible-playbook -s site.yml
 	```
 ---
+#### Update 2017-12-20
+	Dashboard能用
+	Neutron
+	openstack network agent list 任然全是down....
+
 #### Update 2017-12-19
 	增加Neutron and Dashboard
 	但是 openstack network agent list 却始终是down状态。。。。正在解决

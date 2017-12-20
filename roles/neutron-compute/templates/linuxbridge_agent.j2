@@ -199,11 +199,11 @@ enable_vxlan = False
 # version of this value must match the value of the 'overlay_ip_version' option
 # in the ML2 plug-in configuration file on the neutron server node(s). (IP
 # address value)
-#local_ip = <None>
+#local_ip = {{ compute_ip }}
 
 # Extension to use alongside ml2 plugin's l2population mechanism driver. It
 # enables the plugin to populate VXLAN forwarding table. (boolean value)
-#l2_population = false
+#l2_population = True
 
 # Enable local ARP responder which provides local responses instead of
 # performing ARP broadcast into the overlay. Enabling local ARP responder is

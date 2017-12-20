@@ -11,12 +11,12 @@
    - keystone-n
    - glance
    - nova-controller
-  #  - neutron-controller
-  #  - dashboard
+   - neutron-controller
+   - dashboard
 
 - hosts: compute-nodes
   roles:
    - ntp-other
    - infracommon
    - nova-compute
-  #  - neutron-compute
+   - neutron-compute

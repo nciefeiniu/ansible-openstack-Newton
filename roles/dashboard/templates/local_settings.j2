@@ -53,19 +53,19 @@ WEBROOT = '/'
 # service API. For example, The identity service APIs have inconsistent
 # use of the decimal point, so valid options would be 2.0 or 3.
 # Minimum compute version to get the instance locked status is 2.9.
-#OPENSTACK_API_VERSIONS = {
-#    "data-processing": 1.1,
-#    "identity": 3,
-#    "image": 2,
-#    "volume": 2,
-#    "compute": 2,
-#}
-
 OPENSTACK_API_VERSIONS = {
+    "data-processing": 1.1,
     "identity": 3,
     "image": 2,
     "volume": 2,
+    "compute": 2,
 }
+
+#OPENSTACK_API_VERSIONS = {
+#    "identity": 3,
+#    "image": 2,
+#    "volume": 2,
+#}
 
 # Set this to True if running on a multi-domain model. When this is enabled, it
 # will require the user to enter the Domain name in addition to the username
@@ -141,7 +141,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 CACHES = {
     'default': {
          'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-         'LOCATION': 'controller:11211',
+         'LOCATION': '{{controller_ip}}:11211',
     }
 }
 
@@ -426,7 +426,7 @@ DROPDOWN_MAX_ITEMS = 30
 # The timezone of the server. This should correspond with the timezone
 # of your entire OpenStack installation, and hopefully be in UTC.
 #TIME_ZONE = "UTC"
-TIME_ZONE = "CN"
+TIME_ZONE = "Asia/Shanghai"
 
 # When launching an instance, the menu of available flavors is
 # sorted by RAM usage, ascending. If you would like a different sort order,
