@@ -178,7 +178,7 @@ enable_security_group = True
 # Enable VXLAN on the agent. Can be enabled when agent is managed by ml2 plugin
 # using linuxbridge mechanism driver (boolean value)
 #enable_vxlan = true
-enable_vxlan = False
+enable_vxlan = True
 
 # TTL for vxlan interface protocol packets. (integer value)
 #ttl = <None>
@@ -200,10 +200,12 @@ enable_vxlan = False
 # in the ML2 plug-in configuration file on the neutron server node(s). (IP
 # address value)
 #local_ip = {{ compute_ip }}
+local_ip = {{ compute_ip }}
 
 # Extension to use alongside ml2 plugin's l2population mechanism driver. It
 # enables the plugin to populate VXLAN forwarding table. (boolean value)
 #l2_population = True
+l2_population = True
 
 # Enable local ARP responder which provides local responses instead of
 # performing ARP broadcast into the overlay. Enabling local ARP responder is

@@ -107,18 +107,18 @@
 # List of network type driver entrypoints to be loaded from the
 # neutron.ml2.type_drivers namespace. (list value)
 #type_drivers = local,flat,vlan,gre,vxlan,geneve
-type_drivers = flat,vlan
+type_drivers = flat,vlan,vxlan
 
 # Ordered list of network_types to allocate as tenant networks. The default
 # value 'local' is useful for single-box testing but provides no connectivity
 # between hosts. (list value)
 #tenant_network_types = local
-tenant_network_types =
+tenant_network_types = vxlan
 
 # An ordered list of networking mechanism driver entrypoints to be loaded from
 # the neutron.ml2.mechanism_drivers namespace. (list value)
 #mechanism_drivers =
-mechanism_drivers = linuxbridge
+mechanism_drivers = linuxbridge,l2population
 
 # An ordered list of extension driver entrypoints to be loaded from the
 # neutron.ml2.extension_drivers namespace. For example: extension_drivers =
@@ -214,6 +214,7 @@ flat_networks = provider
 # Comma-separated list of <vni_min>:<vni_max> tuples enumerating ranges of
 # VXLAN VNI IDs that are available for tenant network allocation (list value)
 #vni_ranges =
+vni_ranges = 1:1000
 
 # Multicast group for VXLAN. When configured, will enable sending all broadcast
 # traffic to this multicast group. When left unconfigured, will disable

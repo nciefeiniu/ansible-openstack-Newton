@@ -44,6 +44,7 @@
     - neutron-server
     - neutron-plugin-ml2
     - neutron-linuxbridge-agent
+    - neutron-l3-agent
     - neutron-dhcp-agent
     - neutron-metadata-agent
   tags:
@@ -67,6 +68,13 @@
   template:
     src: linuxbridge_agent.j2
     dest: /etc/neutron/plugins/ml2/linuxbridge_agent.ini
+  tags:
+     - neutron-controller
+
+- name: Edit the /etc/neutron/l3_agent.ini  file and complete the following actions
+  template:
+    src: l3_agent.j2
+    dest: /etc/neutron/l3_agent.ini
   tags:
      - neutron-controller
 
@@ -98,7 +106,7 @@
     - neutron-linuxbridge-agent
     - neutron-dhcp-agent
     - neutron-metadata-agent
-    # - neutron-l3-agent
+    - neutron-l3-agent
   become: yes
   tags:
      - neutron-controller

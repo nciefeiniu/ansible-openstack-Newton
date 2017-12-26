@@ -156,6 +156,7 @@ physical_interface_mappings = provider:{{ PROVIDER_INTERFACE_NAME }}
 # Driver for security groups firewall in the L2 agent (string value)
 #firewall_driver = <None>
 #firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
+#firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
 firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
 
 # Controls whether the neutron security group API is enabled in the server. It
@@ -178,7 +179,8 @@ enable_security_group = True
 # Enable VXLAN on the agent. Can be enabled when agent is managed by ml2 plugin
 # using linuxbridge mechanism driver (boolean value)
 #enable_vxlan = true
-enable_vxlan = False
+#enable_vxlan = False
+enable_vxlan = True
 
 # TTL for vxlan interface protocol packets. (integer value)
 #ttl = <None>
@@ -200,10 +202,12 @@ enable_vxlan = False
 # in the ML2 plug-in configuration file on the neutron server node(s). (IP
 # address value)
 #local_ip = <None>
+local_ip = {{ controller_ip }}
 
 # Extension to use alongside ml2 plugin's l2population mechanism driver. It
 # enables the plugin to populate VXLAN forwarding table. (boolean value)
 #l2_population = false
+l2_population = True
 
 # Enable local ARP responder which provides local responses instead of
 # performing ARP broadcast into the overlay. Enabling local ARP responder is
