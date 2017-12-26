@@ -24,6 +24,10 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 	sudo ansible-playbook -s site.yml
 	```
 ---
+#### Update 2017-12-26
+	解决openstack network agent list 全down的问题
+
+
 #### Update 2017-12-20
 	Dashboard能用
 	Neutron
