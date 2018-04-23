@@ -56,11 +56,13 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 	添加keystone
 
 #### Update 2017-12-4
-    安装了基础环境:
-    - chrony
-    - mariadb
-    - rabbitmq
-    - memcached
-    - CREATE DATABASE
+
+安装了基础环境:
+
+- chrony
+- mariadb
+- rabbitmq
+- memcached
+- CREATE DATABASE
 
 	
