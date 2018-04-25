@@ -2,16 +2,18 @@ ansible-openstack-Newton
 ========================
 
 ## 开始
-环境ubuntu 16.04   (在线安装，请保持网络通畅)
+环境ubuntu 16.04   
 Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
-- ubuntu 14.04地址： 链接：https://pan.baidu.com/s/1miBrRS0 密码：u20d
+- ubuntu 14.04地址： 链接：https://pan.baidu.com/s/161_bOMc9w2mCm9zCdvxzmQ 密码：ho7d
 - ubuntu 16.04地址： 链接：https://pan.baidu.com/s/1dF3yFIT 密码：njuc
 - 导入box： 
    ```bash
    vagrant box add ubuntu/trusty64 package.box
    
    vagrant box add ubuntu-16.04 bento_ubuntu-16.04.box
-   ```
+   ```
+- 可自行修改虚拟机ip,其中bridge网卡是桥接网卡，需要修改为你连接的路由器相同网段（即与你宿主机相同网段的ip）
+
 - 启动测试环境
 	```bash
 	vagrant up
