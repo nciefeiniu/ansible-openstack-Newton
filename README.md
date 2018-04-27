@@ -19,6 +19,7 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 	vagrant up
 	```
 
+- 用户名：vagrant   密码：vagrant
 - 运行ansible-playbook(请在管理机上运行（192.168.221.100）)
 	```bash
 	cd /vagrant
