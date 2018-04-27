@@ -15,6 +15,11 @@
 
 - name: Configure nova
   template: src=nova.j2 dest=/etc/nova/nova.conf
+  tags:
+     - nova-compute
+
+- name: Configure nova-compute
+  template: src=nova-compute.j2 dest=/etc/nova/nova-compute.conf
   notify:
    - restart nova-compute
   tags:
