@@ -7,16 +7,26 @@ Vagrant.configure("2") do |config|
 
       deploy.vm.network "private_network", ip: "192.168.221.100"
       deploy.vm.provision "shell" , inline: <<-SHELL
-        wget http://mirrors.163.com/.help/sources.list.trusty -O /etc/apt/sources.list
-        apt-get update
-        add-apt-repository ppa:ansible/ansible
-        apt-get update
-        
-        cat >> /etc/ssh/ssh_config <<EOF   
-      StrictHostKeyChecking no
-      UserKnownHostsFile=/dev/null
+        cat > /etc/apt/sources.list <<EOF
+	deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
+	deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+	deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
+	deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
+	deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
 EOF
+	cat >> /etc/ssh/ssh_config <<EOF   
+        StrictHostKeyChecking no
+        UserKnownHostsFile=/dev/null
+EOF
+	apt-get update
+	apt-get install -y ansible
     SHELL
+
 
     deploy.vm.provider "virtualbox" do |vbox|
       vbox.memory = 1024
