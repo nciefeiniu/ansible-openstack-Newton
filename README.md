@@ -7,11 +7,12 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 - ubuntu 14.04地址： 链接：https://pan.baidu.com/s/161_bOMc9w2mCm9zCdvxzmQ 密码：ho7d
 - ubuntu 16.04地址： 链接：https://pan.baidu.com/s/1dF3yFIT 密码：njuc
 - 导入box： 
-   ```bash
-   vagrant box add ubuntu/trusty64 package.box
+```bash 
+vagrant box add ubuntu/trusty64 package.box
    
-   vagrant box add ubuntu-16.04 bento_ubuntu-16.04.box
-   ```
+vagrant box add ubuntu-16.04 bento_ubuntu-16.04.box
+```
+     
 - 可自行修改虚拟机ip,其中bridge网卡是桥接网卡，需要修改为你连接的路由器相同网段（即与你宿主机相同网段的ip）
 
 - 启动测试环境
@@ -22,31 +23,31 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 
 - 用户名：vagrant   密码：vagrant
 - 运行ansible-playbook(请在管理机上运行（192.168.221.100）)
-	```bash
+```bash
 	cd /vagrant
 	
 	sudo ansible-playbook -s site.yml
-	```
+```
 ---
 #### Update 2018-04-27
 	修改更新pip的语句，现在pip 10.0.0有个bug，使用pip 9.0.1
 	如果需要使用pip 10.0.0
 	可以修改 /usr/bin/pip 文件
-	```bash
+```bash
 	from pip import main
 	
 	if __name__ == '__main__':
     	sys.exit(main())
-	```
+```
 	
 	改为：
 	
-	```bash
+```bash
 	from pip import main
 
 	if __name__ == '__main__':
     	sys.exit(main())
-	```
+```
 
 
 #### Update 2017-12-26
