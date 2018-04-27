@@ -37,7 +37,7 @@ vagrant box add ubuntu-16.04 bento_ubuntu-16.04.box
 	from pip import main
 	
 	if __name__ == '__main__':
-    	sys.exit(main())
+        sys.exit(main())
 ```
 	
 	改为：
@@ -46,7 +46,7 @@ vagrant box add ubuntu-16.04 bento_ubuntu-16.04.box
 	from pip import main
 
 	if __name__ == '__main__':
-    	sys.exit(main())
+        sys.exit(main())
 ```
 
 
