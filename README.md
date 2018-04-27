@@ -28,6 +28,10 @@ vagrant box add ubuntu-16.04 bento_ubuntu-16.04.box
 	
 	sudo ansible-playbook -s site.yml
 ```
+
+- Controller节点IP: 192.168.221.101
+- Compute节点IP: 192.168.221.102
+
 ---
 #### Update 2018-04-27
 	修改更新pip的语句，现在pip 10.0.0有个bug，使用pip 9.0.1
