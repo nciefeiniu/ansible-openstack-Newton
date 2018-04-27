@@ -33,7 +33,7 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 	修改更新pip的语句，现在pip 10.0.0有个bug，使用pip 9.0.1
 	如果需要使用pip 10.0.0
 	可以修改 /usr/bin/pip 文件
-	```python
+	```
 	
 	from pip import main
 	
@@ -43,7 +43,7 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 	
 	改为：
 	
-	```python
+	```
 	
 	from pip import main
 
