@@ -13,7 +13,7 @@
 
 - name: Update pip
 #  pip: name=pip
-  shell: sudo pip install --upgrade pip
+  shell: sudo pip install --upgrade pip==9.0.1
 
 
 - name: Install shade
