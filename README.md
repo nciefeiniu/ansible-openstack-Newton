@@ -17,6 +17,7 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 	vagrant up
 	```
 
+- ssh登陆 账号：vagrant 密码：vagrant
 - 运行ansible-playbook(请在管理机上运行（192.168.221.100）)
 	```bash
 	cd /vagrant
@@ -24,6 +25,27 @@ Vigrantfile是虚拟机的配置文件（请自行搭建vagrant+virtualbox）
 	sudo ansible-playbook -s site.yml
 	```
 ---
+#### Update 2018-04-27
+	修改更新pip的语句，现在pip 10.0.0有个bug，使用pip 9.0.1
+	如果需要使用pip 10.0.0
+	可以修改 /usr/bin/pip 文件
+	```python
+	from pip import main
+	
+	if __name__ == '__main__':
+    	sys.exit(main())
+	```
+	
+	改为：
+	
+	```python
+	from pip import main
+
+	if __name__ == '__main__':
+    	sys.exit(main())
+	```
+
+
 #### Update 2017-12-26
 	解决openstack network agent list 全down的问题
 
