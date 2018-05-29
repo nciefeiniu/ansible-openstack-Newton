@@ -13,7 +13,7 @@ vagrant box add ubuntu/trusty64 package.box
 vagrant box add ubuntu-16.04 bento_ubuntu-16.04.box
 ```
      
-- 可自行修改虚拟机ip,其中bridge网卡是桥接网卡，需要修改为你连接的路由器相同网段（即与你宿主机相同网段的ip）
+- 可自行修改虚拟机ip,其中bridge网卡是桥接网卡，需要修改为你连接的路由器相同网段（即与你宿主机相同网段的ip），*请在vagrantfile中修改ip*
 
 - 启动测试环境
 	```bash
@@ -21,7 +21,7 @@ vagrant box add ubuntu-16.04 bento_ubuntu-16.04.box
 	```
 
 
-- 用户名：vagrant   密码：vagrant
+- 虚拟机用户名：vagrant   密码：vagrant
 - 运行ansible-playbook(请在管理机上运行（192.168.221.100）)
 ```bash
 	cd /vagrant
@@ -47,10 +47,10 @@ vagrant box add ubuntu-16.04 bento_ubuntu-16.04.box
 	改为：
 	
 ```bash
-	from pip import main
-
+	from pip import __main__
+	
 	if __name__ == '__main__':
-            sys.exit(main())
+   	    sys.exit(__main__._main())
 ```
 
 
